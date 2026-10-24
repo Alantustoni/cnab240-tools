@@ -6,7 +6,7 @@ Biblioteca Python para **juntar, validar e montar arquivos bancários
 CNAB240** (padrão Febraban de 240 posições), sem interface e sem
 dependências externas.
 
-Nasceu dentro da [ALAN Suite](https://github.com/Alantustoni/alan-suite), um app
+Nasceu dentro da [Contas a Pagar Suite](https://github.com/Alantustoni/contas-a-pagar-suite), um app
 de contas a pagar em uso diário num setor financeiro real, e foi separada
 para poder ser usada em scripts, pipelines e outros sistemas.
 
