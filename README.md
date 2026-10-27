@@ -106,7 +106,22 @@ saía errado; em arquivos com 3 ou mais lotes, trailers intermediários
 ficavam no meio; e o primeiro título de cada arquivo real era descartado.
 
 Aqui os trailers são recalculados a partir do conteúdo, o corte é feito
-pela estrutura (tipo de registro) e cada decisão vai para o `log`. O modo
+pela estrutura (tipo de registro) e cada decisão vai para o `log`.
+
+```python
+# antes (juntador_ret_v2.py): contadores fixos, certos só por coincidência
+LINHA_FINAL_1 = "23700025         000032000000000000000000000000000000000000000000"
+LINHA_FINAL_2 = "23799999         000002000108"
+
+# agora (cnab240/ret.py): só os contadores mudam; o resto do leiaute é preservado
+def _trailers_recalculados(registros, modelo_lote, modelo_arquivo):
+    qtd_lote    = len(registros) + 1        # detalhes + trailer de lote
+    qtd_arquivo = len(registros) + 2        # + trailer de arquivo
+    t_lote = _substituir(modelo_lote, 17, f"{qtd_lote:06d}")
+    t_arq  = _substituir(modelo_arquivo, 17, "000001")
+    t_arq  = _substituir(t_arq, 23, f"{qtd_arquivo:06d}")
+    return t_lote, t_arq
+``` O modo
 antigo continua disponível (`"recalcular_trailer": False`,
 `"filtro_estrutural": False`) para comparação — os 4 testes marcados como
 `xfail` documentam justamente esse comportamento legado.
